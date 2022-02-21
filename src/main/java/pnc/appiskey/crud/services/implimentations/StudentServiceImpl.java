@@ -5,13 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pnc.appiskey.crud.models.Student;
-import pnc.appiskey.crud.models.Teacher;
 import pnc.appiskey.crud.repositories.StudentRepository;
 import pnc.appiskey.crud.repositories.TeacherRepository;
 import pnc.appiskey.crud.services.StudentService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -63,16 +61,4 @@ public class StudentServiceImpl implements StudentService {
         return "Student not found \u274c";
     }
 
-    @Override
-    public String assignTeacherToStudent(Long studentId, Long teacherId) {
-        if (repository.findById(studentId).isPresent()
-                && teacherRepo.findById(teacherId).isPresent()) {
-            Student student = repository.findById(studentId).get();
-            Teacher teacher = teacherRepo.findById(teacherId).get();
-            student.assignTeacher(teacher);
-            repository.save(student);
-            return "Teacher assigned \u2713";
-        }
-        return "Unable to assign teacher to student \u274c";
-    }
 }

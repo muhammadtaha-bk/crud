@@ -13,12 +13,12 @@ import pnc.appiskey.crud.services.TeacherService;
 @Service
 public class TeacherServiceImpl implements TeacherService {
     private final TeacherRepository repository;
-    private final StudentRepository studentRepo;
+    private final StudentRepository studentRepository;
 
     @Autowired
-    public TeacherServiceImpl(TeacherRepository repository, StudentRepository studentRepo) {
+    public TeacherServiceImpl(TeacherRepository repository, StudentRepository studentRepository) {
         this.repository = repository;
-        this.studentRepo = studentRepo;
+        this.studentRepository = studentRepository;
     }
 
     @Override
@@ -60,16 +60,16 @@ public class TeacherServiceImpl implements TeacherService {
         return "Teacher not found \u274c";
     }
 
-//    @Override
-//    public String assignTeacherToStudent(Long studentId, Long teacherId) {
-//        if (repository.findById(teacherId).isPresent()
-//                && studentRepo.findById(studentId).isPresent()) {
-//            Student student = studentRepo.findById(studentId).get();
-//            Teacher teacher = repository.findById(teacherId).get();
-//            teacher.assignTeacher(student);
-//            repository.save(teacher);
-//            return "Teacher assigned \u2713";
-//        }
-//        return "Unable to assign teacher to student \u274c";
-//    }
+    @Override
+    public String assignTeacherToStudent(Long studentId, Long teacherId) {
+        if (repository.findById(teacherId).isPresent()
+                && studentRepository.findById(studentId).isPresent()) {
+            Student student = studentRepository.findById(studentId).get();
+            Teacher teacher = repository.findById(teacherId).get();
+             teacher.assignTeacher(student);
+            repository.save(teacher);
+            return "Teacher assigned \u2713";
+        }
+        return "Unable to assign teacher to student \u274c";
+    }
 }

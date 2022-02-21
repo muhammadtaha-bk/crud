@@ -14,6 +14,5 @@ public interface TeacherService {
 
     String deleteTeacher(Long id);
 
-//    String assignTeacherToStudent(Long studentId, Long teacherId);
-
+    String assignTeacherToStudent(Long studentId, Long teacherId);
 }

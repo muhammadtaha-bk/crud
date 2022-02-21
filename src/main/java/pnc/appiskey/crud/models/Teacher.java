@@ -2,13 +2,8 @@ package pnc.appiskey.crud.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -18,21 +13,21 @@ public class Teacher {
     private Long id;
     private String name;
     @ManyToMany
+    @JoinTable(name = "student_teacher",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "teacher_id"))
     @JsonIgnore
     private Set<Student> studentSet;
 
-//    public void assignTeacher(Student student) {
-//        studentSet.add(student);
-//    }
-
-    public Teacher() {
-        super();
+    public void assignTeacher(Student student) {
+        this.studentSet.add(student);
     }
 
-    public Teacher(Long id, String name, Set<Student> studentSet) {
-        this.id = id;
+    public Teacher() {
+    }
+
+    public Teacher(String name) {
         this.name = name;
-        this.studentSet = studentSet;
     }
 
     public Long getId() {
@@ -51,40 +46,11 @@ public class Teacher {
         this.name = name;
     }
 
-    public Set<Student> getstudentSet() {
+    public Set<Student> getStudentSet() {
         return studentSet;
     }
 
-    public void setstudentSet(Set<Student> studentSet) {
+    public void setStudentSet(Set<Student> studentSet) {
         this.studentSet = studentSet;
-    }
-
-    @Override
-    public String toString() {
-        return "Teacher{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", studentSet=" + studentSet +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Teacher teacher = (Teacher) o;
-
-        if (!id.equals(teacher.id)) return false;
-        if (!name.equals(teacher.name)) return false;
-        return Objects.equals(studentSet, teacher.studentSet);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + (studentSet != null ? studentSet.hashCode() : 0);
-        return result;
     }
 }

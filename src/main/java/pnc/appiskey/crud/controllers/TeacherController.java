@@ -37,14 +37,14 @@ public class TeacherController {
         return service.updateName(id, teacher);
     }
 
-//    @PutMapping("/{teacherId}/student/{studentId}")
-//    public String assignTeacher(@PathVariable Long studentId, @PathVariable Long teacherId) {
-//        return service.assignTeacherToStudent(studentId, teacherId);
-//    }
-
     @DeleteMapping("/{id}")
     public String deleteTeacher(@PathVariable Long id){
         return service.deleteTeacher(id);
+    }
+
+    @PutMapping("/{teacherId}/student/{studentId}")
+    public String assignTeacher(@PathVariable Long studentId, @PathVariable Long teacherId) {
+        return service.assignTeacherToStudent(studentId, teacherId);
     }
 
 }

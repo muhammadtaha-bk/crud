@@ -37,11 +37,6 @@ public class StudentController {
         return service.updateName(id, student);
     }
 
-    @PutMapping("/{studentId}/teacher/{teacherId}")
-    public String assignTeacher(@PathVariable Long studentId, @PathVariable Long teacherId) {
-        return service.assignTeacherToStudent(studentId, teacherId);
-    }
-
     @DeleteMapping("/{id}")
     public String deleteStudent(@PathVariable Long id) {
         return service.deleteStudent(id);
