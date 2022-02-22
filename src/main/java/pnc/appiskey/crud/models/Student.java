@@ -1,5 +1,7 @@
 package pnc.appiskey.crud.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 import java.util.Set;
@@ -10,8 +12,11 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @ManyToMany(mappedBy = "studentSet")
-    private Set<Teacher> teacherSet;
+//    @ManyToMany(mappedBy = "studentSet")
+//    private Set<Teacher> teacherSet;
+    @ManyToMany(mappedBy = "enrolledStudents")
+    @JsonIgnore
+    private Set<Course> enrolledIn;
 
     public Student() {
     }
@@ -36,12 +41,20 @@ public class Student {
         this.name = name;
     }
 
-    public Set<Teacher> getTeacherSet() {
-        return teacherSet;
+//    public Set<Teacher> getTeacherSet() {
+//        return teacherSet;
+//    }
+
+//    public void setTeacherSet(Set<Teacher> teacherSet) {
+//        this.teacherSet = teacherSet;
+//    }
+
+
+    public Set<Course> getEnrolledIn() {
+        return enrolledIn;
     }
 
-    public void setTeacherSet(Set<Teacher> teacherSet) {
-        this.teacherSet = teacherSet;
+    public void setEnrolledIn(Set<Course> enrolledIn) {
+        this.enrolledIn = enrolledIn;
     }
-
 }

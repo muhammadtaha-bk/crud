@@ -60,16 +60,16 @@ public class TeacherServiceImpl implements TeacherService {
         return "Teacher not found \u274c";
     }
 
-    @Override
-    public String assignTeacherToStudent(Long studentId, Long teacherId) {
-        if (repository.findById(teacherId).isPresent()
-                && studentRepository.findById(studentId).isPresent()) {
-            Student student = studentRepository.findById(studentId).get();
-            Teacher teacher = repository.findById(teacherId).get();
-             teacher.assignTeacher(student);
-            repository.save(teacher);
-            return "Teacher assigned \u2713";
-        }
-        return "Unable to assign teacher to student \u274c";
-    }
+//    @Override
+//    public String assignTeacherToStudent(Long studentId, Long teacherId) {
+//        if (repository.findById(teacherId).isPresent()
+//                && studentRepository.findById(studentId).isPresent()) {
+//            Student student = studentRepository.findById(studentId).get();
+//            Teacher teacher = repository.findById(teacherId).get();
+//             teacher.assignTeacher(student);
+//            repository.save(teacher);
+//            return "Teacher assigned \u2713";
+//        }
+//        return "Unable to assign teacher to student \u274c";
+//    }
 }

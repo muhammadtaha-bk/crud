@@ -6,7 +6,7 @@ import pnc.appiskey.crud.models.Student;
 public interface StudentService {
     String register(Student student);
 
-    ResponseEntity get(Long id);
+    ResponseEntity getById(Long id);
 
     ResponseEntity getAll();
 
@@ -14,4 +14,5 @@ public interface StudentService {
 
     String deleteStudent(Long id);
 
+    ResponseEntity getByName(String name);
 }

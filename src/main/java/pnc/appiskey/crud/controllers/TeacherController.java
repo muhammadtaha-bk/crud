@@ -42,9 +42,9 @@ public class TeacherController {
         return service.deleteTeacher(id);
     }
 
-    @PutMapping("/{teacherId}/student/{studentId}")
-    public String assignTeacher(@PathVariable Long studentId, @PathVariable Long teacherId) {
-        return service.assignTeacherToStudent(studentId, teacherId);
-    }
+//    @PutMapping("/{teacherId}/student/{studentId}")
+//    public String assignTeacher(@PathVariable Long studentId, @PathVariable Long teacherId) {
+//        return service.assignTeacherToStudent(studentId, teacherId);
+//    }
 
 }

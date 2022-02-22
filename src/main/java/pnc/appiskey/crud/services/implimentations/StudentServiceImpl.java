@@ -29,7 +29,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public ResponseEntity get(Long id) {
+    public ResponseEntity getById(Long id) {
         if(repository.findById(id).isPresent()){
             return ResponseEntity.status(HttpStatus.OK).body(repository.findById(id));
         }
@@ -59,6 +59,11 @@ public class StudentServiceImpl implements StudentService {
             return "Record deleted \u2713";
         }
         return "Student not found \u274c";
+    }
+
+    @Override
+    public ResponseEntity getByName(String name) {
+        return ResponseEntity.status(HttpStatus.OK).body(repository.findAllByName(name));
     }
 
 }

@@ -22,14 +22,17 @@ public class StudentController {
         return service.register(student);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity getStudent(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.get(id));
-    }
-
     @GetMapping
-    public ResponseEntity getStudents() {
-        return ResponseEntity.status(HttpStatus.OK).body(service.getAll());
+    public ResponseEntity getStudentByIdOrName(
+            @RequestParam(required = false) Long id,
+            @RequestParam(required = false) String name) {
+        if(id != null){
+            return ResponseEntity.status(HttpStatus.OK).body(service.getById(id));
+        } else if(name != null){
+            return ResponseEntity.status(HttpStatus.OK).body(service.getByName(name));
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(service.getAll());
+        }
     }
 
     @PutMapping("/{id}")
