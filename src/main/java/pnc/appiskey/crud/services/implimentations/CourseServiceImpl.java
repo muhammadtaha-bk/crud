@@ -14,12 +14,15 @@ import pnc.appiskey.crud.services.CourseService;
 
 @Service
 public class CourseServiceImpl implements CourseService {
+
     private final CourseRepository repository;
     private final StudentRepository studentRepository;
     private final TeacherRepository teacherRepository;
 
     @Autowired
-    public CourseServiceImpl(CourseRepository repository, StudentRepository studentRepository, TeacherRepository teacherRepository) {
+    public CourseServiceImpl(CourseRepository repository,
+                             StudentRepository studentRepository,
+                             TeacherRepository teacherRepository) {
         this.repository = repository;
         this.studentRepository = studentRepository;
         this.teacherRepository = teacherRepository;
@@ -27,12 +30,12 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public ResponseEntity getById(Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(repository.getById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(repository.findById(id));
     }
 
     @Override
     public ResponseEntity getByName(String name) {
-        return ResponseEntity.status(HttpStatus.OK).body(repository.findAllByName(name));
+        return ResponseEntity.status(HttpStatus.OK).body(repository.findByName(name));
     }
 
     @Override

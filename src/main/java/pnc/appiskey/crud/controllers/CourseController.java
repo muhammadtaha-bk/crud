@@ -18,7 +18,8 @@ public class CourseController {
     }
 
     @GetMapping
-    public ResponseEntity getStudentByIdOrName(@RequestParam(required = false) Long id, @RequestParam(required = false) String name) {
+    public ResponseEntity getCourseByIdOrName(@RequestParam(required = false) Long id,
+                                              @RequestParam(required = false) String name) {
         if (id != null) {
             return ResponseEntity.status(HttpStatus.OK).body(service.getById(id));
         } else if (name != null) {
@@ -47,6 +48,5 @@ public class CourseController {
     public String assignTeacher(@PathVariable Long courseId, @PathVariable Long teacherId) {
         return service.assignTeacher(courseId, teacherId);
     }
-
 
 }

@@ -1,7 +1,5 @@
 package pnc.appiskey.crud.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -12,7 +10,9 @@ public class Course {
     private Long id;
     private String name;
     @ManyToMany
-    @JoinTable(name = "student_course", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
+    @JoinTable(name = "student_course",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
     private Set<Student> enrolledStudents;
     @OneToOne
     private Teacher taughtBy;

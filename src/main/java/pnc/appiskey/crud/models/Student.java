@@ -12,8 +12,7 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-//    @ManyToMany(mappedBy = "studentSet")
-//    private Set<Teacher> teacherSet;
+    private String email;
     @ManyToMany(mappedBy = "enrolledStudents")
     @JsonIgnore
     private Set<Course> enrolledIn;
@@ -41,20 +40,19 @@ public class Student {
         this.name = name;
     }
 
-//    public Set<Teacher> getTeacherSet() {
-//        return teacherSet;
-//    }
-
-//    public void setTeacherSet(Set<Teacher> teacherSet) {
-//        this.teacherSet = teacherSet;
-//    }
-
-
     public Set<Course> getEnrolledIn() {
         return enrolledIn;
     }
 
     public void setEnrolledIn(Set<Course> enrolledIn) {
         this.enrolledIn = enrolledIn;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

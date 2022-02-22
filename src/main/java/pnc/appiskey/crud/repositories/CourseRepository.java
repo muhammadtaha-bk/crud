@@ -7,5 +7,5 @@ import pnc.appiskey.crud.models.Course;
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
-    Course findAllByName(String name);
+    Course findByName(String name);
 }

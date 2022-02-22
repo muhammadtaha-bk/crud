@@ -23,28 +23,27 @@ public class TeacherController {
     }
 
     @GetMapping
-    public ResponseEntity getTeachers() {
-        return ResponseEntity.status(HttpStatus.OK).body(service.getAll());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity getTeacher(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.get(id));
-    }
-
-    @PutMapping("/{id}")
-    public String updateTeacherName(@PathVariable Long id, @RequestBody Teacher teacher) {
-        return service.updateName(id, teacher);
+    public ResponseEntity getTeacherByIdOrName(@RequestParam(required = false) Long id,
+                                               @RequestParam(required = false) String name,
+                                               @RequestParam(required = false) String email) {
+        if (id != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(service.getById(id));
+        } else if (name != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(service.getByName(name));
+        } else if (email != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(service.getByEmail(email));
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(service.getAll());
+        }
     }
 
     @DeleteMapping("/{id}")
-    public String deleteTeacher(@PathVariable Long id){
+    public String deleteTeacher(@PathVariable Long id) {
         return service.deleteTeacher(id);
     }
 
-//    @PutMapping("/{teacherId}/student/{studentId}")
-//    public String assignTeacher(@PathVariable Long studentId, @PathVariable Long teacherId) {
-//        return service.assignTeacherToStudent(studentId, teacherId);
-//    }
-
+    @PutMapping("/{id}")
+    public String updateInfo(@PathVariable Long id, @RequestBody Teacher teacher) {
+        return service.updateDetails(id, teacher);
+    }
 }

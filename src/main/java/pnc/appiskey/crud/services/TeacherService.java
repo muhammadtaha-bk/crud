@@ -8,11 +8,17 @@ public interface TeacherService {
 
     ResponseEntity getAll();
 
-    ResponseEntity get(Long id);
+//    ResponseEntity get(Long id);
 
-    String updateName(Long id, Teacher teacher);
+    String updateDetails(Long id, Teacher teacher);
 
     String deleteTeacher(Long id);
+
+    ResponseEntity getById(Long id);
+
+    ResponseEntity getByName(String name);
+
+    ResponseEntity getByEmail(String email);
 
 //    String assignTeacherToStudent(Long studentId, Long teacherId);
 }

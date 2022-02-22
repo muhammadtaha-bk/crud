@@ -23,25 +23,27 @@ public class StudentController {
     }
 
     @GetMapping
-    public ResponseEntity getStudentByIdOrName(
-            @RequestParam(required = false) Long id,
-            @RequestParam(required = false) String name) {
-        if(id != null){
+    public ResponseEntity getStudentByIdOrName(@RequestParam(required = false) Long id,
+                                               @RequestParam(required = false) String name,
+                                               @RequestParam(required = false) String email) {
+        if (id != null) {
             return ResponseEntity.status(HttpStatus.OK).body(service.getById(id));
-        } else if(name != null){
+        } else if (name != null) {
             return ResponseEntity.status(HttpStatus.OK).body(service.getByName(name));
+        } else if (email != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(service.getByEmail(email));
         } else {
             return ResponseEntity.status(HttpStatus.OK).body(service.getAll());
         }
     }
 
-    @PutMapping("/{id}")
-    public String updateStudentName(@PathVariable Long id, @RequestBody Student student) {
-        return service.updateName(id, student);
-    }
-
     @DeleteMapping("/{id}")
     public String deleteStudent(@PathVariable Long id) {
         return service.deleteStudent(id);
+    }
+
+    @PutMapping("/{id}")
+    public String updateInfo(@PathVariable Long id, @RequestBody Student student) {
+        return service.updateDetails(id, student);
     }
 }

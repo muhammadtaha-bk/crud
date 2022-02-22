@@ -10,9 +10,11 @@ public interface StudentService {
 
     ResponseEntity getAll();
 
-    String updateName(Long id, Student student);
+    String updateDetails(Long id, Student student);
 
     String deleteStudent(Long id);
 
     ResponseEntity getByName(String name);
+
+    ResponseEntity getByEmail(String email);
 }

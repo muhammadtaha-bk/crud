@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pnc.appiskey.crud.models.Student;
 import pnc.appiskey.crud.repositories.StudentRepository;
-import pnc.appiskey.crud.repositories.TeacherRepository;
 import pnc.appiskey.crud.services.StudentService;
 
 import java.util.List;
@@ -14,12 +13,10 @@ import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService {
     private final StudentRepository repository;
-    private final TeacherRepository teacherRepo;
 
     @Autowired
-    public StudentServiceImpl(StudentRepository repository, TeacherRepository teacherRepo) {
+    public StudentServiceImpl(StudentRepository repository) {
         this.repository = repository;
-        this.teacherRepo = teacherRepo;
     }
 
     @Override
@@ -42,10 +39,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public String updateName(Long id, Student student) {
+    public String updateDetails(Long id, Student student) {
         if (repository.findById(id).isPresent()) {
             Student s = repository.findById(id).get();
             s.setName(student.getName());
+            s.setEmail(student.getEmail());
             repository.save(s);
             return "Record updated \u2713";
         }
@@ -64,6 +62,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public ResponseEntity getByName(String name) {
         return ResponseEntity.status(HttpStatus.OK).body(repository.findAllByName(name));
+    }
+
+    @Override
+    public ResponseEntity getByEmail(String email) {
+        return ResponseEntity.status(HttpStatus.OK).body(repository.findByEmail(email));
     }
 
 }

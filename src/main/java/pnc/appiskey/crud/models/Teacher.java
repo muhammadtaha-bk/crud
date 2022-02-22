@@ -4,26 +4,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
-import java.util.Set;
-
 @Entity
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-//    @ManyToMany
-//    @JoinTable(name = "student_teacher",
-//            joinColumns = @JoinColumn(name = "student_id"),
-//            inverseJoinColumns = @JoinColumn(name = "teacher_id"))
-//    @JsonIgnore
-//    private Set<Student> studentSet;
+    private String email;
     @OneToOne
+    @JsonIgnore
     private Course teaches;
-
-//    public void assignTeacher(Student student) {
-//        this.studentSet.add(student);
-//    }
 
     public Teacher() {
     }
@@ -48,11 +38,19 @@ public class Teacher {
         this.name = name;
     }
 
-//    public Set<Student> getStudentSet() {
-//        return studentSet;
-//    }
+    public String getEmail() {
+        return email;
+    }
 
-//    public void setStudentSet(Set<Student> studentSet) {
-//        this.studentSet = studentSet;
-//    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Course getTeaches() {
+        return teaches;
+    }
+
+    public void setTeaches(Course teaches) {
+        this.teaches = teaches;
+    }
 }
